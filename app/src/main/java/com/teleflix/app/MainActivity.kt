@@ -2537,7 +2537,14 @@ class MainActivity : AppCompatActivity() {
 
         // Normalize title for grouping (strip episode/part prefixes & suffixes)
         fun normalizeTitle(title: String): String {
-            var clean = title.trim().removePrefix("📦 ").removePrefix("🗄️ ").removeSuffix(" (Combined)").trim()
+            var clean = title.trim()
+                .removePrefix("Select:")
+                .removePrefix("Select")
+                .removePrefix("📦")
+                .removePrefix("🗄️")
+                .removePrefix("📂")
+                .trim()
+            clean = clean.removeSuffix(" (Combined)").trim()
             clean = clean.replace(Regex("""[\._\s-]*(?:part|pt|cd)[\._\s-]*\d+.*$""", RegexOption.IGNORE_CASE), "")
                          .replace(Regex("""\.\d{3,4}$"""), "")
                          .replace(Regex("""\.(mkv|mp4|avi|mov|wmv|ts|flv)$""", RegexOption.IGNORE_CASE), "")
@@ -2981,7 +2988,15 @@ class MainActivity : AppCompatActivity() {
             setPadding(pad, pad, pad, pad)
         }
 
-        val cleanTitle = baseName.removePrefix("📦 ").removePrefix("🗄️ ")
+        val cleanTitle = baseName.trim()
+            .removePrefix("Select:")
+            .removePrefix("Select")
+            .removePrefix("📦")
+            .removePrefix("🗄️")
+            .removePrefix("📂")
+            .trim()
+            .replace(Regex("""[\._\s-]*(?:part|pt|cd)[\._\s-]*\d+.*$""", RegexOption.IGNORE_CASE), "")
+            .trim()
 
         val headerText = TextView(this).apply {
             text = "📂 $cleanTitle"

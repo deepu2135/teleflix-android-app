@@ -1147,6 +1147,12 @@ object TelegramRepository {
         
         fun normalizeKey(name: String): String {
             return name.lowercase()
+                .removePrefix("select:")
+                .removePrefix("select")
+                .removePrefix("📦")
+                .removePrefix("🗄️")
+                .removePrefix("📂")
+                .replace(Regex("""[\._\s-]*(?:part|pt|cd)[\._\s-]*\d+.*$""", RegexOption.IGNORE_CASE), "")
                 .replace(Regex("""\.(mkv|mp4|avi|mov|wmv|ts|flv|rar|zip|7z)$""", RegexOption.IGNORE_CASE), "")
                 .replace(Regex("""[\[\]\(\)\{\}\._\s-]+"""), " ")
                 .trim()
